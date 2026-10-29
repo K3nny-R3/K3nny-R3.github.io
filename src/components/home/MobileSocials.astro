@@ -1,0 +1,28 @@
+---
+const links = [
+  { name: 'Steam', url: 'https://store.steampowered.com/news/' },
+  { name: 'SteamDB', url: 'https://steamdb.info/' },
+  { name: 'RSS', url: '/feed.xml' },
+];
+---
+
+<section class='md:hidden'>
+  <h2 class='hidden'>Enlaces rápidos</h2>
+  <ul class='flex justify-between gap-3'>
+    {
+      links.map((item) => (
+        <li>
+          <a
+            href={item.url}
+            target={item.url.startsWith('http') ? '_blank' : undefined}
+            rel='noopener'
+            title={`Ir a ${item.name}`}
+            class='steam-btn steam-btn--ghost text-sm'
+          >
+            {item.name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

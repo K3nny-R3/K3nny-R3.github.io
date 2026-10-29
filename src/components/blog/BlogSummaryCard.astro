@@ -1,0 +1,51 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatDate } from '../../lib/posts';
+import SteamButton from '../ui/SteamButton.astro';
+import SteamPill from '../ui/SteamPill.astro';
+import SummaryCard from '../generic/SummaryCard.astro';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+---
+
+<SummaryCard
+  title={post.data.title}
+  imgAlt={post.data.title}
+  imgSrc={post.data.imgUrl}
+  description={post.data.description}
+  date={formatDate(post.data.pubDate)}
+>
+  <div class='my-4 flex justify-end'>
+    <SteamButton href={`/blog/${post.id}/`}>Leer noticia &rarr;</SteamButton>
+  </div>
+
+  <div class='hidden sm:inline-block'>
+    <p class='poppins mt-2 text-xs uppercase tracking-widest text-[var(--steam-muted)]'>
+      Etiquetas
+    </p>
+    <div class='flex items-center justify-between'>
+      <ul class='mt-2 flex flex-wrap gap-2'>
+        {
+          post.data.tags.map((tag) => (
+            <li>
+              <a href={`/blog/tags/${tag.toLowerCase()}/`}>
+                <SteamPill>{tag}</SteamPill>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      {
+        post.data.draft && (
+          <span class='rounded-sm bg-[var(--steam-green-dark)] px-3 py-1 text-sm text-white'>
+            Borrador
+          </span>
+        )
+      }
+    </div>
+  </div>
+</SummaryCard>

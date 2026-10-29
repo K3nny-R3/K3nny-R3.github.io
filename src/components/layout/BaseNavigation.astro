@@ -1,0 +1,68 @@
+---
+import SocialIcon from '@components/generic/SocialIcon.astro';
+
+interface Props {
+  pageTitle?: string;
+}
+
+const navigationItems = [
+  { name: 'Inicio', url: '/' },
+  { name: 'Noticias', url: '/blog/' },
+];
+
+const { pageTitle } = Astro.props;
+---
+
+<header class='steam-header sticky top-0 z-40 flex items-center justify-between px-6 py-4'>
+  {pageTitle && <h1 class='hidden'>{pageTitle}</h1>}
+  <a href='/' title='Volver al inicio' class='flex items-center gap-3 hover:text-white'>
+    <span class='steam-logo-mark outfit text-xl'>S</span>
+    <p class='outfit text-xl font-bold uppercase tracking-[0.2em] text-white md:text-3xl'>
+      Steam <span class='text-[var(--steam-blue)]'>Noticias</span>
+    </p>
+  </a>
+  <nav class='hidden md:inline-block'>
+    <h2 class='hidden'>Navegación</h2>
+    <ul class='poppins flex items-center gap-8'>
+      {
+        navigationItems.map((item) => (
+          <li>
+            <a
+              class='text-sm font-semibold uppercase tracking-wider text-[var(--steam-text)] transition-all duration-150 ease-in-out hover:text-white hover:underline'
+              href={item.url}
+              title={`Ir a ${item.name}`}
+            >
+              {item.name}
+            </a>
+          </li>
+        ))
+      }
+      <li>
+        <a
+          class='text-sm font-semibold uppercase tracking-wider text-[var(--steam-text)] hover:text-white hover:underline'
+          href='https://store.steampowered.com/news/'
+          target='_blank'
+          rel='noopener'
+          title='Noticias oficiales en Steam'
+        >
+          Steam oficial &nearr;
+        </a>
+      </li>
+      <li>
+        <a
+          href='/feed.xml'
+          class='text-[var(--steam-text)] hover:text-white'
+          title='Feed RSS'
+        >
+          <SocialIcon icon='rss' class='h-6 w-6' />
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <nav class='flex md:hidden'>
+    <h2 class='hidden'>Navegación móvil</h2>
+    <ul class='flex gap-4 text-sm font-semibold uppercase tracking-wider'>
+      <li><a href='/blog/'>Noticias</a></li>
+    </ul>
+  </nav>
+</header>

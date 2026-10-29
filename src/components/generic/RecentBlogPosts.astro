@@ -1,0 +1,31 @@
+---
+import { getSortedPosts } from '../../lib/posts';
+import BlogList from '../blog/BlogList.astro';
+import SteamButton from '../ui/SteamButton.astro';
+import SteamCard from '../ui/SteamCard.astro';
+
+interface Props {
+  count?: number;
+}
+
+const { count } = Astro.props;
+
+const posts = (await getSortedPosts()).slice(0, count ?? 6);
+---
+
+<section class='mt-8'>
+  <SteamCard flat>
+    <div class='flex items-start justify-between'>
+      <h2 class='outfit steam-heading mb-8 text-2xl font-bold md:text-4xl'>
+        Últimas noticias de Steam
+      </h2>
+      <div class='hidden md:block'>
+        <SteamButton href='/blog/'>Ver todas &rarr;</SteamButton>
+      </div>
+      <div class='block md:hidden'>
+        <SteamButton href='/blog/'>Ver</SteamButton>
+      </div>
+    </div>
+    <BlogList posts={posts} />
+  </SteamCard>
+</section>

@@ -1,0 +1,213 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+:root {
+  /* ---- Steam palette ---- */
+  --steam-header: #171a21;
+  --steam-bg: #1b2838;
+  --steam-bg-deep: #101822;
+  --steam-panel: #16202d;
+  --steam-panel-hi: #1f3347;
+  --steam-border: #2a475e;
+  --steam-blue: #66c0f4;
+  --steam-blue-strong: #1a9fff;
+  --steam-text: #c7d5e0;
+  --steam-muted: #8f98a0;
+  --steam-green: #a4d007;
+  --steam-green-dark: #5c7e10;
+  --steam-shadow: #0a0e13;
+
+  /* Scrollbar tokens */
+  --primary: var(--steam-header);
+  --secondary: var(--steam-blue);
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-color: #3d6c8d var(--steam-header);
+}
+
+@layer base {
+  body {
+    background: var(--steam-bg-deep);
+    color: var(--steam-text);
+    font-family: 'Motiva Sans', Arial, Helvetica, sans-serif;
+  }
+
+  a {
+    color: var(--steam-blue);
+    transition: color 150ms ease-in-out;
+  }
+
+  a:hover {
+    color: #fff;
+  }
+}
+
+@layer components {
+  /* ---- Cards ---- */
+  .steam-card {
+    position: relative;
+    background: linear-gradient(180deg, var(--steam-panel-hi) 0%, var(--steam-panel) 100%);
+    border: 1px solid var(--steam-border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    box-shadow: 6px 6px 0 var(--steam-shadow);
+    transition:
+      transform 200ms ease,
+      box-shadow 200ms ease,
+      border-color 200ms ease;
+  }
+
+  .steam-card:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 4px 4px 0 var(--steam-shadow);
+    border-color: var(--steam-blue);
+  }
+
+  .steam-card--accent {
+    border-top: 4px solid var(--steam-blue-strong);
+  }
+
+  .steam-card--flat:hover {
+    transform: none;
+    box-shadow: 6px 6px 0 var(--steam-shadow);
+    border-color: var(--steam-border);
+  }
+
+  /* ---- Buttons ---- */
+  .steam-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.1rem;
+    border-radius: 2px;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    background: linear-gradient(90deg, #06bfff 0%, #2d73ff 100%);
+    box-shadow: 3px 3px 0 var(--steam-shadow);
+    transition:
+      filter 150ms ease,
+      transform 150ms ease,
+      box-shadow 150ms ease;
+  }
+
+  .steam-btn:hover {
+    color: #fff;
+    filter: brightness(1.12);
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0 var(--steam-shadow);
+  }
+
+  .steam-btn--green {
+    background: linear-gradient(90deg, #75b022 0%, #588a1b 100%);
+  }
+
+  .steam-btn--ghost {
+    background: rgba(103, 193, 245, 0.15);
+    color: var(--steam-blue);
+  }
+
+  .steam-btn--ghost:hover {
+    color: #fff;
+    background: rgba(103, 193, 245, 0.35);
+  }
+
+  /* ---- Tags ---- */
+  .steam-pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 2px;
+    background: rgba(103, 193, 245, 0.2);
+    color: #67c1f5;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    transition:
+      background 150ms ease,
+      color 150ms ease;
+  }
+
+  a:hover > .steam-pill,
+  .steam-pill:hover {
+    background: rgba(103, 193, 245, 0.45);
+    color: #fff;
+  }
+
+  /* ---- Header / footer ---- */
+  .steam-header {
+    background: linear-gradient(180deg, #171a21 0%, #1b2030 100%);
+    border-bottom: 1px solid #000;
+    box-shadow: 0 4px 0 var(--steam-shadow);
+  }
+
+  .steam-logo-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 4px;
+    background: linear-gradient(135deg, #1a9fff 0%, #1a44c2 100%);
+    color: #fff;
+    font-weight: 800;
+    box-shadow: 3px 3px 0 var(--steam-shadow);
+  }
+
+  .steam-footer {
+    background: var(--steam-header);
+    border-top: 1px solid var(--steam-border);
+    color: var(--steam-muted);
+  }
+
+  /* ---- Section backgrounds ---- */
+  .bg-steam-hero {
+    background:
+      radial-gradient(ellipse at 15% 0%, rgba(26, 159, 255, 0.28), transparent 55%),
+      radial-gradient(ellipse at 90% 30%, rgba(164, 208, 7, 0.08), transparent 50%),
+      linear-gradient(180deg, var(--steam-bg) 0%, var(--steam-bg-deep) 100%);
+  }
+
+  .bg-steam-main {
+    background: linear-gradient(180deg, var(--steam-bg) 0%, var(--steam-bg-deep) 100%);
+  }
+
+  .steam-heading {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--steam-blue);
+  }
+}
+
+/* Used by the back-to-top button */
+.card-shadow {
+  box-shadow: 4px 4px 0 var(--steam-shadow);
+  transition: all 0.3s;
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+  background: var(--steam-header);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--steam-header);
+  border-left: 1px solid #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3d6c8d;
+  border: 3px solid var(--steam-header);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--steam-blue);
+}
+
+::selection {
+  background-color: var(--steam-blue);
+  color: #0b141d;
+}

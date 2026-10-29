@@ -1,0 +1,30 @@
+---
+import { Image } from 'astro:assets';
+import SteamCard from '../ui/SteamCard.astro';
+
+interface Props {
+  title: string;
+  imgSrc: ImageMetadata;
+  imgAlt: string;
+  description: string;
+  date?: string;
+}
+
+const { title, imgAlt, imgSrc, description, date } = Astro.props;
+---
+
+<SteamCard accent class='h-full'>
+  {date && <p class='poppins text-xs uppercase tracking-widest text-[var(--steam-muted)]'>{date}</p>}
+  <h3 class='outfit mt-1 text-xl font-bold text-white md:text-2xl'>{title}</h3>
+  <div class='my-4 h-56 overflow-hidden rounded-sm border border-[var(--steam-border)]'>
+    <Image
+      src={imgSrc}
+      alt={imgAlt}
+      width={800}
+      height={400}
+      class='h-full w-full object-cover'
+    />
+  </div>
+  <p class='poppins text-sm md:text-base'>{description}</p>
+  <slot />
+</SteamCard>

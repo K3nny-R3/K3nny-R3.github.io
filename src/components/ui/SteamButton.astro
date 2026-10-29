@@ -1,0 +1,25 @@
+---
+interface Props {
+  href: string;
+  target?: string;
+  variant?: 'blue' | 'green' | 'ghost';
+  class?: string;
+}
+
+const { href, target, variant = 'blue', class: className } = Astro.props;
+const rel = target === '_blank' ? 'noopener' : undefined;
+---
+
+<a
+  href={href}
+  target={target}
+  rel={rel}
+  class:list={[
+    'steam-btn',
+    variant === 'green' && 'steam-btn--green',
+    variant === 'ghost' && 'steam-btn--ghost',
+    className,
+  ]}
+>
+  <slot />
+</a>

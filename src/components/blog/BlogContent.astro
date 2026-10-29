@@ -1,0 +1,22 @@
+---
+import { formatDate } from '../../lib/posts';
+
+interface Props {
+  pubDate: Date;
+  author: string;
+}
+
+const { pubDate, author } = Astro.props;
+---
+
+<article
+  class='poppins prose prose-invert w-full max-w-sm md:max-w-prose prose-a:text-[#66c0f4] prose-headings:text-white prose-strong:text-white'
+>
+  <a href='/blog/' title='Volver a noticias'>&larr; Volver a noticias</a>
+  <p class='text-sm text-[var(--steam-muted)] md:text-base'>
+    Publicado el {formatDate(pubDate)} por {author}
+  </p>
+  <slot />
+  <p class='text-[var(--steam-muted)]'>Redactado por {author}</p>
+  <a href='/blog/' title='Volver a noticias'>&larr; Volver a noticias</a>
+</article>

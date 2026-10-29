@@ -1,0 +1,81 @@
+---
+import RecentBlogPosts from '@components/generic/RecentBlogPosts.astro';
+import MobileSocials from '@components/home/MobileSocials.astro';
+import SteamButton from '@components/ui/SteamButton.astro';
+import SteamCard from '@components/ui/SteamCard.astro';
+import SteamPill from '@components/ui/SteamPill.astro';
+import Layout from '@layouts/Default.astro';
+import { getSortedPosts } from '../lib/posts';
+
+const posts = await getSortedPosts();
+const tags = Array.from(new Set(posts.flatMap((post) => post.data.tags))).sort();
+
+const stats = [
+  { value: '43,5 M', label: 'usuarios simultáneos (récord, 11 oct)' },
+  { value: '3.9.5', label: 'última versión de SteamOS' },
+  { value: '$1.059', label: 'precio inicial de Steam Frame' },
+];
+---
+
+<Layout
+  title='Inicio'
+  pageTitle='Steam Noticias | Inicio'
+  description='Las últimas noticias de Steam y Valve: hardware, SteamOS, Next Fest y más.'
+>
+  <main class='bg-steam-hero p-6'>
+    <MobileSocials />
+    <section id='about' class='mt-4 grid gap-8 md:grid-cols-8'>
+      <h2 class='hidden'>Sobre Steam Noticias</h2>
+      <div class='md:col-span-4'>
+        <SteamCard accent flat class='h-full'>
+          <div class='flex flex-col items-start justify-between gap-4'>
+            <p class='outfit steam-heading text-sm font-semibold'>Noticias · Valve · Steam</p>
+            <p class='outfit text-3xl font-bold text-white md:text-5xl lg:text-6xl'>
+              Las últimas noticias de <span class='text-[var(--steam-blue)]'>Steam</span>
+            </p>
+            <p class='poppins text-base md:text-xl'>
+              Hardware, SteamOS, eventos y cambios en la tienda, resumidos en seis lecturas
+              rápidas.
+            </p>
+            <SteamButton href='/blog/'>Ir a las noticias &rarr;</SteamButton>
+          </div>
+        </SteamCard>
+      </div>
+      <div class='md:col-span-2'>
+        <SteamCard flat class='h-full'>
+          <h2 class='outfit steam-heading mb-6 text-xl font-bold md:text-2xl'>En cifras</h2>
+          <ul class='flex flex-col gap-4'>
+            {
+              stats.map((item) => (
+                <li>
+                  <p class='outfit text-3xl font-bold text-[var(--steam-green)]'>{item.value}</p>
+                  <p class='poppins text-sm text-[var(--steam-muted)]'>{item.label}</p>
+                </li>
+              ))
+            }
+          </ul>
+        </SteamCard>
+      </div>
+      <div class='md:col-span-2'>
+        <SteamCard flat class='h-full'>
+          <h2 class='outfit steam-heading mb-4 text-xl font-bold md:text-2xl'>Temas</h2>
+          <ul class='mb-6 flex flex-wrap gap-2'>
+            {
+              tags.map((tag) => (
+                <li>
+                  <a href={`/blog/tags/${tag.toLowerCase()}/`}>
+                    <SteamPill>{tag}</SteamPill>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+          <p class='poppins text-sm text-[var(--steam-muted)]'>
+            Sitio no oficial hecho por fans. Cada noticia enlaza a las fuentes originales.
+          </p>
+        </SteamCard>
+      </div>
+    </section>
+    <RecentBlogPosts count={6} />
+  </main>
+</Layout>
